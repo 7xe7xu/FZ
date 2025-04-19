@@ -1,9 +1,0 @@
-REM Realiza una captura de pantalla y la guarda en TEMP
-DELAY 1000
-GUI r
-DELAY 400
-STRING powershell
-ENTER
-DELAY 600
-STRING Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $bmp = New-Object Drawing.Bitmap([System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width, [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height); $graphics = [Drawing.Graphics]::FromImage($bmp); $graphics.CopyFromScreen(0, 0, 0, 0, $bmp.Size); $file = "$env:TEMP\captura.png"; $bmp.Save($file, [System.Drawing.Imaging.ImageFormat]::Png); Start-Process $file
-ENTER
